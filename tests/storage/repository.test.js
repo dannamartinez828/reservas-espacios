@@ -64,6 +64,125 @@ test('M1 todos los repositorios localStorage comparten un documento JSON', () =>
   assert.equal(document.collections.usuarios.find((record) => record.id === 'u-1').nombre, 'Ada');
 });
 
+test('HIS-01 el almacén guarda registros de varias colecciones con una sola escritura', () => {
+  const values = new Map();
+  let writes = 0;
+  const storage = {
+    getItem(key) {
+      return values.get(key) ?? null;
+    },
+    setItem(key, value) {
+      writes += 1;
+      values.set(key, value);
+    },
+  };
+  const store = createLocalStorageStore(storage, 'transacciones-test');
+
+  store.guardarLote([
+    { coleccion: 'reservas', registro: { id: 'r-1', estado: 'PENDIENTE' } },
+    {
+      coleccion: 'historial',
+      registro: {
+        id: 'h-1',
+        reservaId: 'r-1',
+        estadoAnterior: null,
+        estadoNuevo: 'PENDIENTE',
+        fechaHora: '2027-05-11T12:00:00.000Z',
+        actorId: 'u-1',
+        motivo: '',
+      },
+    },
+  ]);
+
+  assert.equal(writes, 1);
+  assert.equal(store.createRepository('reservas').obtener('r-1').estado, 'PENDIENTE');
+  assert.equal(store.createRepository('historial').obtener('h-1').reservaId, 'r-1');
+});
+
+test('HIS-02 una escritura fallida en un lote no persiste registros parcialmente', () => {
+  const values = new Map();
+  let failWrites = false;
+  const storage = {
+    getItem(key) {
+      return values.get(key) ?? null;
+    },
+    setItem(key, value) {
+      if (failWrites) {
+        throw new Error('escritura fallida');
+      }
+      values.set(key, value);
+    },
+  };
+  const store = createLocalStorageStore(storage, 'transacciones-test');
+  const reservations = store.createRepository('reservas');
+  const history = store.createRepository('historial');
+  reservations.guardar({ id: 'r-1', estado: 'PENDIENTE' });
+  const persistedBefore = values.get('transacciones-test');
+
+  failWrites = true;
+  assert.throws(() => store.guardarLote([
+    { coleccion: 'reservas', registro: { id: 'r-1', estado: 'APROBADA' } },
+    {
+      coleccion: 'historial',
+      registro: {
+        id: 'h-1',
+        reservaId: 'r-1',
+        estadoAnterior: null,
+        estadoNuevo: 'PENDIENTE',
+        fechaHora: '2027-05-11T12:00:00.000Z',
+        actorId: 'u-1',
+        motivo: '',
+      },
+    },
+  ]), /escritura fallida/);
+
+  assert.equal(values.get('transacciones-test'), persistedBefore);
+  assert.equal(reservations.obtener('r-1').estado, 'PENDIENTE');
+  assert.equal(history.listar('r-1').length, 0);
+});
+
+test('HIS-02 el repositorio de historial impide editar o eliminar registros existentes', () => {
+  const store = createMemoryStore();
+  const repository = store.createRepository('historial');
+  const event = {
+    id: 'h-1',
+    reservaId: 'r-1',
+    estadoAnterior: null,
+    estadoNuevo: 'PENDIENTE',
+    fechaHora: '2027-05-11T12:00:00.000Z',
+    actorId: 'u-1',
+    motivo: '',
+  };
+  repository.guardar(event);
+
+  assert.throws(
+    () => repository.guardar({ ...event, estadoNuevo: 'CANCELADA' }),
+    /historial|inmutable/i,
+  );
+  assert.throws(() => repository.eliminar(event.id), /historial|inmutable/i);
+  assert.deepEqual(repository.obtener(event.id), event);
+});
+
+test('HIS-02 un lote no permite editar un evento de historial existente', () => {
+  const store = createMemoryStore();
+  const history = createHistoryRepository(store);
+  const event = {
+    id: 'h-1',
+    reservaId: 'r-1',
+    estadoAnterior: null,
+    estadoNuevo: 'PENDIENTE',
+    fechaHora: '2027-05-11T12:00:00.000Z',
+    actorId: 'u-1',
+    motivo: '',
+  };
+  history.agregar(event);
+
+  assert.throws(() => store.guardarLote([
+    { coleccion: 'historial', registro: { ...event, estadoNuevo: 'CANCELADA' } },
+  ]), /historial|existente|inmutable/i);
+  assert.deepEqual(history.listar('r-1'), [event]);
+});
+
 test('M1 el historial solo permite agregar y consultar eventos', () => {
   const history = createHistoryRepository(createMemoryStore());
   const event = {

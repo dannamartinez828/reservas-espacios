@@ -31,8 +31,70 @@ function validateRecord(record) {
   }
 }
 
+function validateHistoryEvent(event) {
+  validateRecord(event);
+  if (typeof event.reservaId !== 'string' || event.reservaId.length === 0
+    || !(event.estadoAnterior === null || typeof event.estadoAnterior === 'string')
+    || typeof event.estadoNuevo !== 'string' || event.estadoNuevo.length === 0
+    || typeof event.fechaHora !== 'string' || Number.isNaN(Date.parse(event.fechaHora))
+    || typeof event.actorId !== 'string' || event.actorId.length === 0
+    || !(typeof event.motivo === 'string' || event.motivo === null)) {
+    throw new TypeError('El evento de historial no tiene los campos requeridos.');
+  }
+}
+
 function createStore(adapter) {
+  function guardarLote(entries) {
+    if (!Array.isArray(entries) || entries.length === 0) {
+      throw new TypeError('El lote debe contener al menos un registro.');
+    }
+
+    const document = clone(validateDocument(adapter.read()));
+    const seenRecords = new Set();
+    const savedRecords = [];
+
+    for (const entry of entries) {
+      if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+        throw new TypeError('Cada elemento del lote debe indicar colección y registro.');
+      }
+      const { coleccion, registro } = entry;
+      validateCollectionName(coleccion);
+      validateRecord(registro);
+      const recordKey = `${coleccion}\u0000${registro.id}`;
+      if (seenRecords.has(recordKey)) {
+        throw new Error(`El lote contiene identificadores duplicados en "${coleccion}".`);
+      }
+      seenRecords.add(recordKey);
+
+      const collection = document.collections[coleccion] === undefined
+        ? []
+        : document.collections[coleccion];
+      if (!Array.isArray(collection)) {
+        throw new TypeError(`La colección "${coleccion}" no es válida.`);
+      }
+      document.collections[coleccion] = collection;
+      const index = collection.findIndex((item) => item.id === registro.id);
+      if (coleccion === 'historial') {
+        validateHistoryEvent(registro);
+        if (index !== -1) {
+          throw new Error('Los eventos existentes del historial son inmutables.');
+        }
+      }
+      if (index === -1) {
+        collection.push(clone(registro));
+      } else {
+        collection[index] = clone(registro);
+      }
+      savedRecords.push(clone(registro));
+    }
+
+    adapter.write(document);
+    return savedRecords;
+  }
+
   return {
+    guardarLote,
+
     createRepository(collectionName) {
       validateCollectionName(collectionName);
 
@@ -49,6 +111,8 @@ function createStore(adapter) {
       }
 
       return {
+        guardarLote,
+
         obtener(id) {
           if (typeof id !== 'string' || id.length === 0) {
             throw new TypeError('El identificador debe ser una cadena no vacía.');
@@ -63,6 +127,12 @@ function createStore(adapter) {
           const document = validateDocument(adapter.read());
           const collection = getCollection(document);
           const index = collection.findIndex((item) => item.id === record.id);
+          if (collectionName === 'historial') {
+            validateHistoryEvent(record);
+            if (index !== -1) {
+              throw new Error('Los eventos existentes del historial son inmutables.');
+            }
+          }
           if (index === -1) {
             collection.push(clone(record));
           } else {
@@ -86,6 +156,9 @@ function createStore(adapter) {
           const index = collection.findIndex((item) => item.id === id);
           if (index === -1) {
             return false;
+          }
+          if (collectionName === 'historial') {
+            throw new Error('Los eventos del historial no se pueden eliminar.');
           }
           collection.splice(index, 1);
           adapter.write(document);
@@ -139,7 +212,7 @@ export function createHistoryRepository(store) {
   const repository = store.createRepository('historial');
   return Object.freeze({
     agregar(event) {
-      validateRecord(event);
+      validateHistoryEvent(event);
       if (repository.obtener(event.id) !== null) {
         throw new Error(`El identificador "${event.id}" ya existe en el historial.`);
       }

@@ -26,10 +26,10 @@
 
 ## 5. Aprobación, cancelación e historial
 
-- [ ] 5.1 Implementar aprobación solo desde PENDIENTE con revalidación de cruces, incluso para una solicitud existente cuyo espacio luego se desactivó, y rechazo solo con motivo no vacío tras recortar espacios; aplicar la tabla de transiciones y estados finales; verificar con pruebas `APR-01`, `APR-02`, `APR-03` y `SIM-03` los casos exitosos, conflictos, motivo solo con espacios, transiciones inválidas y estados finales.
-- [ ] 5.2 Implementar cancelación por rol, propiedad, estado y hora de fin; verificar con pruebas `CAN-01` que ADMIN cancele cualquier reserva no final, SOLICITANTE solo las propias, estados finales no se cancelen y el límite exacto de fin (ahora igual o posterior) se rechace.
-- [ ] 5.3 Registrar el evento inicial y cada transición con estado anterior/nuevo, fecha-hora, actor y motivo, y hacer el historial append-only; verificar con pruebas `HIS-01` y `HIS-02` la integridad de los datos y el rechazo de edición/eliminación.
-- [ ] 5.4 Integrar los flujos completos de creación, aprobación/rechazo y cancelación con repositorios en memoria; verificar con `npm test` que reserva e historial permanecen coherentes también cuando falla la persistencia.
+- [x] 5.1 Implementar aprobación solo desde PENDIENTE con revalidación de cruces, incluso para una solicitud existente cuyo espacio luego se desactivó, y rechazo solo con motivo no vacío tras recortar espacios; aplicar la tabla de transiciones y estados finales; verificar con pruebas `APR-01`, `APR-02`, `APR-03` y `SIM-03` los casos exitosos, conflictos, motivo solo con espacios, transiciones inválidas y estados finales.
+- [x] 5.2 Implementar cancelación por rol, propiedad, estado y hora de fin; verificar con pruebas `CAN-01` que ADMIN cancele cualquier reserva no final, SOLICITANTE solo las propias, estados finales no se cancelen y el límite exacto de fin (ahora igual o posterior) se rechace.
+- [x] 5.3 Registrar el evento inicial y cada transición con estado anterior/nuevo, fecha-hora, actor y motivo, y hacer el historial append-only; verificar con pruebas `HIS-01` y `HIS-02` la integridad de los datos y el rechazo de edición/eliminación.
+- [x] 5.4 Integrar los flujos completos de creación, aprobación/rechazo y cancelación con repositorios en memoria; verificar con `npm test` que reserva e historial permanecen coherentes también cuando falla la persistencia.
 
 ## 6. Interfaz de usuario
 

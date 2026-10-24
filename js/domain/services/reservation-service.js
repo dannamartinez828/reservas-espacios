@@ -57,7 +57,7 @@ export function createReservationService(
 ) {
   requireRepository(usersRepository, ['obtener'], 'usuarios');
   requireRepository(spacesRepository, ['obtener', 'listar'], 'espacios');
-  requireRepository(reservationsRepository, ['listar', 'guardar'], 'reservas');
+  requireRepository(reservationsRepository, ['listar', 'guardarLote'], 'reservas');
 
   return Object.freeze({
     createRequest(actor, request, now = new Date()) {
@@ -102,7 +102,19 @@ export function createReservationService(
         ...times,
         estado: 'PENDIENTE',
       };
-      reservationsRepository.guardar(reservation);
+      const historyEvent = {
+        id: generateId(),
+        reservaId: reservation.id,
+        estadoAnterior: null,
+        estadoNuevo: 'PENDIENTE',
+        fechaHora: now.toISOString(),
+        actorId: currentActor.id,
+        motivo: '',
+      };
+      reservationsRepository.guardarLote([
+        { coleccion: 'reservas', registro: reservation },
+        { coleccion: 'historial', registro: historyEvent },
+      ]);
       return reservation;
     },
 
