@@ -97,7 +97,7 @@ export function createUserService(usersRepository) {
 
     setAccountStatus(actor, userId, estado) {
       assertCanPerform(actor, 'manageUsers');
-      if (estado !== 'ACTIVO' && estado !== 'INACTIVO') {
+     if (estado !== 'ACTIVO' && estado !== 'INACTIVO') {
         throw new TypeError('El estado de la cuenta no es válido.');
       }
       if (typeof userId !== 'string' || userId.length === 0) {
