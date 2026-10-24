@@ -9,9 +9,9 @@
 
 ## 2. Usuarios y roles
 
-- [ ] 2.1 Implementar registro con correo único tras quitar espacios externos y comparar sin distinguir mayúsculas, contraseña almacenada como hash, rol propio SOLICITANTE y estado inicial activo; verificar casos `USR-01` de registro válido, duplicado exacto y duplicado con capitalización/espacios distintos.
-- [ ] 2.2 Implementar inicio de sesión de usuarios activos y creación idempotente del administrador semilla de demostración; verificar con pruebas `USR-02` para credenciales correctas/incorrectas e inactividad y `USR-03` para credenciales semilla, hash y ausencia de duplicados.
-- [ ] 2.3 Implementar activación/desactivación de cuentas y autorización para ADMIN/SOLICITANTE; verificar con pruebas `USR-04` y `ROL-01`/`ROL-02` que los inactivos no inician sesión ni reservan y los roles no exceden sus permisos.
+- [x] 2.1 Implementar registro con correo único tras quitar espacios externos y comparar sin distinguir mayúsculas, contraseña almacenada como hash, rol propio SOLICITANTE y estado inicial activo; verificar casos `USR-01` de registro válido, duplicado exacto y duplicado con capitalización/espacios distintos.
+- [x] 2.2 Implementar inicio de sesión de usuarios activos y creación idempotente del administrador semilla de demostración; verificar con pruebas `USR-02` para credenciales correctas/incorrectas e inactividad y `USR-03` para credenciales semilla, hash y ausencia de duplicados.
+- [x] 2.3 Implementar activación/desactivación de cuentas y autorización para ADMIN/SOLICITANTE; verificar con pruebas `USR-04` y `ROL-01`/`ROL-02` que los inactivos no inician sesión ni reservan y los roles no exceden sus permisos.
 
 ## 3. Espacios
 
