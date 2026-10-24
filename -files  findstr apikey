@@ -1,0 +1,5 @@
+[33m356347d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m spec: especificaciones iniciales del sistema de reservas (change sistema-reservas-base)
+[33m87ffff5[m chore(openspec): inicializar OpenSpec con GitHub Copilot
+[33me4358d0[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore(openspec): inicializar OpenSpec
+[33m1d786ae[m docs(plan): plan de ingenieria inicial anterior a las especificaciones
+[33m696715b[m chore: inicializar repositorio con .gitignore

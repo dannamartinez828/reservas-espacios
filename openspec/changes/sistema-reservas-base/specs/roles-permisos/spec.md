@@ -7,7 +7,7 @@ Establece los límites de autorización entre administradores y solicitantes par
 ## ADDED Requirements
 
 ### Requirement: ROL-01 Permisos del administrador
-El sistema debe (MUST) permitir a ADMIN activo gestionar espacios y usuarios, y aprobar, rechazar o cancelar cualquier reserva.
+El sistema debe (MUST) permitir a ADMIN activo gestionar espacios y usuarios, aprobar o rechazar solicitudes PENDIENTES y cancelar cualquier reserva no final, sujeto a las reglas de transición y vigencia.
 
 #### Scenario: Administrador ejecuta una operación administrativa
 - **CUANDO** un ADMIN activo y autenticado gestiona un espacio o usuario, o decide o cancela una reserva
@@ -16,6 +16,10 @@ El sistema debe (MUST) permitir a ADMIN activo gestionar espacios y usuarios, y 
 #### Scenario: Solicitante intenta operación administrativa
 - **CUANDO** un SOLICITANTE intenta gestionar espacios o usuarios, aprobar o rechazar una reserva, o cancelar una reserva ajena
 - **ENTONCES** el sistema deniega la operación sin modificar los datos
+
+#### Scenario: Administrador intenta cancelar una reserva final
+- **CUANDO** un ADMIN intenta cancelar una reserva RECHAZADA o CANCELADA
+- **ENTONCES** el sistema deniega la operación y conserva el estado final
 
 ### Requirement: ROL-02 Permisos del solicitante
 El sistema debe (MUST) permitir a SOLICITANTE activo consultar disponibilidad, crear solicitudes y cancelar únicamente reservas propias.

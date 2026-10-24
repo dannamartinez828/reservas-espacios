@@ -7,7 +7,7 @@ Define quién puede cancelar reservas y conserva una trazabilidad inmutable de c
 ## ADDED Requirements
 
 ### Requirement: CAN-01 Cancelación permitida por rol y vigencia
-El sistema debe (MUST) permitir a un ADMIN cancelar cualquier reserva no final y a un SOLICITANTE cancelar solo sus propias reservas no finales, siempre que la hora de fin no haya pasado.
+El sistema debe (MUST) permitir a un ADMIN cancelar cualquier reserva no final y a un SOLICITANTE cancelar solo sus propias reservas no finales, únicamente antes de la hora de fin.
 
 #### Scenario: Solicitante cancela reserva propia vigente
 - **CUANDO** un SOLICITANTE activo cancela su reserva PENDIENTE o APROBADA antes de su hora de fin
@@ -17,8 +17,16 @@ El sistema debe (MUST) permitir a un ADMIN cancelar cualquier reserva no final y
 - **CUANDO** un ADMIN activo cancela una reserva no final de otro usuario antes de su hora de fin
 - **ENTONCES** el sistema cambia su estado a CANCELADA
 
-#### Scenario: Cancelación no autorizada o vencida
-- **CUANDO** un SOLICITANTE intenta cancelar una reserva ajena, o cualquier actor intenta cancelar una reserva cuyo fin ya pasó
+#### Scenario: Solicitante intenta cancelar una reserva ajena
+- **CUANDO** un SOLICITANTE intenta cancelar una reserva que pertenece a otro usuario
+- **ENTONCES** el sistema deniega la operación y conserva el estado actual
+
+#### Scenario: Cancelación de una reserva final
+- **CUANDO** cualquier actor intenta cancelar una reserva RECHAZADA o CANCELADA
+- **ENTONCES** el sistema deniega la operación y conserva el estado final
+
+#### Scenario: Cancelación en la hora de fin o después
+- **CUANDO** cualquier actor intenta cancelar una reserva y el momento actual es igual o posterior a la hora de fin de la reserva
 - **ENTONCES** el sistema deniega la operación y conserva el estado actual
 
 ### Requirement: HIS-01 Registro de cada transición

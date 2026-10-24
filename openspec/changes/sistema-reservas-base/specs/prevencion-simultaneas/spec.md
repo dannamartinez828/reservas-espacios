@@ -13,6 +13,10 @@ El sistema debe (MUST) determinar cruces para el mismo espacio y fecha usando in
 - **CUANDO** dos intervalos del mismo espacio y fecha comparten tiempo según inicioA < finB y finA > inicioB
 - **ENTONCES** el sistema los identifica como cruzados
 
+#### Scenario: Un intervalo está contenido en otro
+- **CUANDO** un intervalo del mismo espacio y fecha comienza después del otro y termina antes de que este termine
+- **ENTONCES** el sistema los identifica como cruzados
+
 #### Scenario: Dos reservas son contiguas
 - **CUANDO** una reserva termina exactamente al inicio de la otra
 - **ENTONCES** el sistema no las considera cruzadas

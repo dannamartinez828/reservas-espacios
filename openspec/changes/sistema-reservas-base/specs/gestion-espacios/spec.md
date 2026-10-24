@@ -34,3 +34,14 @@ El sistema debe (MUST) permitir la gestión de espacios únicamente a usuarios A
 #### Scenario: Solicitante intenta modificar un espacio
 - **CUANDO** un SOLICITANTE intenta crear, editar, activar o desactivar un espacio
 - **ENTONCES** el sistema deniega la operación y no altera el espacio
+
+### Requirement: ESP-04 Edición de espacios
+El sistema debe (MUST) permitir a un ADMIN activo editar los datos de un espacio sin cambiar sus reservas asociadas.
+
+#### Scenario: Edición válida
+- **CUANDO** un ADMIN activo actualiza tipo, nombre, capacidad o ubicación con valores válidos y un nombre no usado por otro espacio
+- **ENTONCES** el espacio conserva el identificador, estado y reservas asociadas, y refleja los nuevos datos
+
+#### Scenario: Edición inválida o con nombre duplicado
+- **CUANDO** un ADMIN activo actualiza un espacio con tipo inválido, capacidad no positiva, dato obligatorio vacío o nombre utilizado por otro espacio
+- **ENTONCES** el sistema rechaza la edición e informa el dato inválido sin alterar el espacio

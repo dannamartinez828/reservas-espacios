@@ -7,7 +7,7 @@ Define las decisiones administrativas de aprobación o rechazo de solicitudes y 
 ## ADDED Requirements
 
 ### Requirement: APR-01 Aprobar solicitudes pendientes
-El sistema debe (MUST) permitir a un ADMIN activo aprobar solicitudes PENDIENTES, siempre que la revalidación de disponibilidad no detecte una reserva APROBADA cruzada.
+El sistema debe (MUST) permitir a un ADMIN activo aprobar solicitudes PENDIENTES, siempre que la revalidación de disponibilidad no detecte una reserva APROBADA cruzada. La desactivación posterior del espacio no impide tramitar una solicitud que ya existía.
 
 #### Scenario: Aprobación válida
 - **CUANDO** un ADMIN activo aprueba una solicitud PENDIENTE sin conflicto aprobado
@@ -17,8 +17,12 @@ El sistema debe (MUST) permitir a un ADMIN activo aprobar solicitudes PENDIENTES
 - **CUANDO** un ADMIN intenta aprobar una solicitud PENDIENTE que cruza una reserva APROBADA del mismo espacio y fecha
 - **ENTONCES** la operación falla con error y la solicitud permanece PENDIENTE
 
+#### Scenario: Aprobación de solicitud existente para espacio desactivado
+- **CUANDO** un ADMIN activo aprueba una solicitud PENDIENTE que se creó antes de que su espacio pasara a INACTIVO y no existe una reserva APROBADA cruzada
+- **ENTONCES** el sistema permite la aprobación y conserva la reserva existente
+
 ### Requirement: APR-02 Rechazar con motivo
-El sistema debe (MUST) permitir a un ADMIN activo rechazar una solicitud PENDIENTE únicamente cuando proporciona un motivo no vacío.
+El sistema debe (MUST) permitir a un ADMIN activo rechazar una solicitud PENDIENTE únicamente cuando proporciona un motivo que no quede vacío después de eliminar espacios externos.
 
 #### Scenario: Rechazo con motivo
 - **CUANDO** un ADMIN activo rechaza una solicitud PENDIENTE e indica un motivo no vacío
@@ -26,6 +30,10 @@ El sistema debe (MUST) permitir a un ADMIN activo rechazar una solicitud PENDIEN
 
 #### Scenario: Rechazo sin motivo
 - **CUANDO** un ADMIN activo intenta rechazar una solicitud PENDIENTE sin motivo
+- **ENTONCES** el sistema rechaza la operación y conserva el estado PENDIENTE
+
+#### Scenario: Rechazo con motivo compuesto solo por espacios
+- **CUANDO** un ADMIN activo intenta rechazar una solicitud PENDIENTE con un motivo que contiene únicamente espacios
 - **ENTONCES** el sistema rechaza la operación y conserva el estado PENDIENTE
 
 ### Requirement: APR-03 Transiciones permitidas y estados finales

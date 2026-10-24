@@ -7,7 +7,7 @@ Define el registro, la autenticación de demostración y el estado de las cuenta
 ## ADDED Requirements
 
 ### Requirement: USR-01 Registro propio de solicitantes
-El sistema debe (MUST) registrar usuarios con nombre, correo único y contraseña guardada como hash, asignando siempre el rol SOLICITANTE y estado activo.
+El sistema debe (MUST) registrar usuarios con nombre, correo único y contraseña guardada como hash, asignando siempre el rol SOLICITANTE y estado activo. La unicidad del correo se comprueba sin distinguir mayúsculas y tras eliminar espacios externos.
 
 #### Scenario: Registro propio válido
 - **CUANDO** una persona se registra con nombre, correo no registrado y contraseña válida
@@ -16,6 +16,10 @@ El sistema debe (MUST) registrar usuarios con nombre, correo único y contraseñ
 #### Scenario: Correo ya registrado
 - **CUANDO** una persona intenta registrarse con un correo que ya pertenece a un usuario
 - **ENTONCES** el sistema rechaza el registro y no crea una segunda cuenta para ese correo
+
+#### Scenario: Correo duplicado con mayúsculas o espacios externos
+- **CUANDO** una persona intenta registrarse con un correo que solo difiere por mayúsculas o espacios externos de un correo registrado
+- **ENTONCES** el sistema rechaza el registro como duplicado y no crea otra cuenta
 
 ### Requirement: USR-02 Inicio de sesión de usuario activo
 El sistema debe (MUST) autenticar a un usuario activo usando su correo y contraseña correspondientes.
