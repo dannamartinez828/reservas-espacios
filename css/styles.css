@@ -18,7 +18,8 @@ body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -31,6 +32,10 @@ input {
 
 .app {
   width: min(100%, 440px);
+}
+
+.app.admin-app {
+  width: min(100%, 1100px);
 }
 
 .card {
@@ -80,7 +85,21 @@ form {
   color: #1b2940;
 }
 
+.field select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #c6d1df;
+  border-radius: 8px;
+  color: #1b2940;
+  background: #fff;
+}
+
 .field input:focus {
+  border-color: #3569a8;
+  outline: 3px solid rgb(53 105 168 / 18%);
+}
+
+.field select:focus {
   border-color: #3569a8;
   outline: 3px solid rgb(53 105 168 / 18%);
 }
@@ -108,6 +127,17 @@ form {
   background: #194a80;
 }
 
+.button-secondary {
+  padding: 10px 16px;
+  border: 1px solid #b8c8dc;
+  background: #f4f7fb;
+  color: #245c9c;
+}
+
+.button-secondary:hover {
+  background: #e8eff8;
+}
+
 .button-link {
   margin-top: 12px;
   padding: 8px 0;
@@ -131,6 +161,57 @@ form {
   border: 1px solid #a8d7b8;
   background: #effaf2;
   color: #1d6534;
+}
+
+.admin-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 20px 0;
+}
+
+.admin-navigation .button-link {
+  margin: 0;
+}
+
+.admin-card .intro {
+  margin-bottom: 18px;
+}
+
+.admin-form {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  align-items: end;
+  margin: 24px 0;
+}
+
+.admin-form .button {
+  padding: 10px 16px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+th {
+  color: #42536a;
+  font-size: 0.86rem;
+}
+
+td .button-link {
+  margin: 0 10px 0 0;
 }
 
 .welcome-card .intro {

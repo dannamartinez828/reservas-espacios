@@ -32,6 +32,11 @@ export function createUserService(usersRepository) {
   }
 
   return Object.freeze({
+    list(actor) {
+      assertCanPerform(actor, 'manageUsers');
+      return usersRepository.listar().map(toPublicUser);
+    },
+
     async register({ nombre, correo, password } = {}) {
       const normalizedName = normalizeName(nombre);
       const normalizedEmail = normalizeEmail(correo);

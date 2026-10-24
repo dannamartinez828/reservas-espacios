@@ -33,7 +33,7 @@
 
 ## 6. Interfaz de usuario
 
-- [ ] 6.1 Implementar vistas y controladores para registro, inicio de sesión, administración de usuarios/roles y espacios sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `USR-01`, `USR-02`, `USR-04`, `ROL-01` y `ESP-01`.
+- [x] 6.1 Implementar vistas y controladores para registro, inicio de sesión, administración de usuarios/roles y espacios sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `USR-01`, `USR-02`, `USR-04`, `ROL-01` y `ESP-01`.
 - [ ] 6.2 Implementar formularios de solicitud y consulta de disponibilidad sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `SOL-01`, `SOL-02`, `SOL-03`, `DIS-01` y `SIM-02`.
 - [ ] 6.3 Implementar pantallas de decisiones, cancelación y consulta del historial sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `APR-01`, `APR-02`, `CAN-01`, `HIS-01` y `HIS-02`.
 - [ ] 6.4 Ejecutar la suite completa y comprobar en Apache/XAMPP los flujos principales por rol; verificar `npm test` y una lista manual de navegación, persistencia, estados y mensajes de error en el navegador.

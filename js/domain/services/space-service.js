@@ -54,6 +54,11 @@ export function createSpaceService(spacesRepository) {
   }
 
   return Object.freeze({
+    list(actor) {
+      assertCanPerform(actor, 'manageSpaces');
+      return spacesRepository.listar();
+    },
+
     create(actor, data) {
       assertCanPerform(actor, 'manageSpaces');
       const spaceData = validateSpaceData(data);
