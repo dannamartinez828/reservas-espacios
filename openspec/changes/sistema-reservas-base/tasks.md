@@ -26,14 +26,14 @@
 
 ## 5. Aprobación, cancelación e historial
 
-- [ ] 5.1 Implementar aprobación solo desde PENDIENTE con revalidación de cruces, incluso para una solicitud existente cuyo espacio luego se desactivó, y rechazo solo con motivo no vacío tras recortar espacios; verificar con pruebas `APR-01`, `APR-02` y `SIM-03` los casos exitosos, conflictos, motivo solo con espacios y transiciones inválidas.
+- [ ] 5.1 Implementar aprobación solo desde PENDIENTE con revalidación de cruces, incluso para una solicitud existente cuyo espacio luego se desactivó, y rechazo solo con motivo no vacío tras recortar espacios; aplicar la tabla de transiciones y estados finales; verificar con pruebas `APR-01`, `APR-02`, `APR-03` y `SIM-03` los casos exitosos, conflictos, motivo solo con espacios, transiciones inválidas y estados finales.
 - [ ] 5.2 Implementar cancelación por rol, propiedad, estado y hora de fin; verificar con pruebas `CAN-01` que ADMIN cancele cualquier reserva no final, SOLICITANTE solo las propias, estados finales no se cancelen y el límite exacto de fin (ahora igual o posterior) se rechace.
 - [ ] 5.3 Registrar el evento inicial y cada transición con estado anterior/nuevo, fecha-hora, actor y motivo, y hacer el historial append-only; verificar con pruebas `HIS-01` y `HIS-02` la integridad de los datos y el rechazo de edición/eliminación.
 - [ ] 5.4 Integrar los flujos completos de creación, aprobación/rechazo y cancelación con repositorios en memoria; verificar con `npm test` que reserva e historial permanecen coherentes también cuando falla la persistencia.
 
 ## 6. Interfaz de usuario
 
-- [ ] 6.1 Implementar vistas y controladores para registro, inicio de sesión, administración de usuarios/roles y espacios; verificar con pruebas automatizadas `USR-01`, `USR-02`, `USR-04`, `ROL-01` y `ESP-01` que las acciones y errores se reflejan sin duplicar reglas de dominio.
-- [ ] 6.2 Implementar formularios de solicitud y consulta de disponibilidad; verificar con pruebas automatizadas `SOL-01`, `SOL-02`, `SOL-03`, `DIS-01` y `SIM-02` el envío válido, validaciones visibles y conflictos.
-- [ ] 6.3 Implementar pantallas de decisiones, cancelación y consulta del historial; verificar con pruebas automatizadas `APR-01`, `APR-02`, `CAN-01`, `HIS-01` y `HIS-02` las acciones permitidas, los errores y la trazabilidad.
+- [ ] 6.1 Implementar vistas y controladores para registro, inicio de sesión, administración de usuarios/roles y espacios sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `USR-01`, `USR-02`, `USR-04`, `ROL-01` y `ESP-01`.
+- [ ] 6.2 Implementar formularios de solicitud y consulta de disponibilidad sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `SOL-01`, `SOL-02`, `SOL-03`, `DIS-01` y `SIM-02`.
+- [ ] 6.3 Implementar pantallas de decisiones, cancelación y consulta del historial sin duplicar reglas de dominio; verificar con pruebas automatizadas de los controladores (funciones sin DOM) y con la lista manual de 6.4 los requisitos `APR-01`, `APR-02`, `CAN-01`, `HIS-01` y `HIS-02`.
 - [ ] 6.4 Ejecutar la suite completa y comprobar en Apache/XAMPP los flujos principales por rol; verificar `npm test` y una lista manual de navegación, persistencia, estados y mensajes de error en el navegador.
