@@ -1,0 +1,148 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1b2940;
+  background: #f1f5fa;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+}
+
+.app {
+  width: min(100%, 440px);
+}
+
+.card {
+  padding: 36px;
+  border: 1px solid #d9e2ef;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 16px 48px rgb(31 55 88 / 9%);
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #3569a8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.65rem, 5vw, 2rem);
+}
+
+.intro {
+  margin: 10px 0 26px;
+  color: #5e6d81;
+}
+
+form {
+  display: grid;
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #c6d1df;
+  border-radius: 8px;
+  color: #1b2940;
+}
+
+.field input:focus {
+  border-color: #3569a8;
+  outline: 3px solid rgb(53 105 168 / 18%);
+}
+
+.button {
+  min-height: 44px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.button-primary {
+  padding: 10px 16px;
+  background: #245c9c;
+  color: #fff;
+}
+
+.button-primary:hover {
+  background: #194a80;
+}
+
+.button-link {
+  margin-top: 12px;
+  padding: 8px 0;
+  background: transparent;
+  color: #245c9c;
+}
+
+.message {
+  padding: 11px 13px;
+  border-radius: 8px;
+  line-height: 1.45;
+}
+
+.message-error {
+  border: 1px solid #e3b7b7;
+  background: #fff3f3;
+  color: #842929;
+}
+
+.message-success {
+  border: 1px solid #a8d7b8;
+  background: #effaf2;
+  color: #1d6534;
+}
+
+.welcome-card .intro {
+  margin-bottom: 24px;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 26px 22px;
+  }
+}

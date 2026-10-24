@@ -69,6 +69,20 @@ export function createUserService(usersRepository) {
       return toPublicUser(user);
     },
 
+    getActiveUser(userId) {
+      if (typeof userId !== 'string' || userId.length === 0) {
+        throw new TypeError('El identificador del usuario no es válido.');
+      }
+      const user = usersRepository.obtener(userId);
+      if (!user) {
+        throw new Error('No se encontró el usuario.');
+      }
+      if (user.estado !== 'ACTIVO') {
+        throw new Error('La cuenta del usuario no está activa.');
+      }
+      return toPublicUser(user);
+    },
+
     async ensureSeedAdmin() {
       const correo = 'admin@uninpahu.edu';
       const existing = usersRepository.listar()
