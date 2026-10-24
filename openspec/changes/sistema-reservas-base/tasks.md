@@ -15,14 +15,14 @@
 
 ## 3. Espacios
 
-- [ ] 3.1 Implementar alta y edición con tipo permitido, nombre único, capacidad positiva, ubicación y estado inicial ACTIVO; verificar con pruebas `ESP-01` para alta y validaciones, y `ESP-04` para edición válida, datos inválidos, nombre duplicado y conservación de reservas/estado.
-- [ ] 3.2 Implementar activación/desactivación y restricciones de rol para la gestión de espacios; verificar con pruebas `ESP-02` que las reservas existentes se conservan y `ESP-03` que un solicitante no puede modificar espacios.
+- [x] 3.1 Implementar alta y edición con tipo permitido, nombre único, capacidad positiva, ubicación y estado inicial ACTIVO; verificar con pruebas `ESP-01` para alta y validaciones, y `ESP-04` para edición válida, datos inválidos, nombre duplicado y conservación de reservas/estado.
+- [x] 3.2 Implementar activación/desactivación y restricciones de rol para la gestión de espacios; verificar con pruebas `ESP-02` que las reservas existentes se conservan y `ESP-03` que un solicitante no puede modificar espacios.
 
 ## 4. Reservas y disponibilidad
 
-- [ ] 4.1 Implementar creación de solicitudes de un día con espacio activo, inicio posterior al reloj local, horario válido y estado PENDIENTE; verificar con pruebas `SOL-01`, `SOL-02` y `SOL-03` para fecha pasada, hoy con inicio vencido/actual/futuro, cada borde horario, usuario inactivo, espacio inactivo y casos válidos.
-- [ ] 4.2 Implementar consulta de disponibilidad por fecha y horario, incluyendo solo espacios activos y considerando bloqueantes únicamente las reservas APROBADAS; verificar con pruebas `DIS-01` y `DIS-02` para aprobadas, pendientes y extremos contiguos.
-- [ ] 4.3 Implementar detección de cruces semiabiertos y rechazo de nuevas solicitudes que crucen reservas APROBADAS sin bloquear solicitudes pendientes entre sí; verificar con pruebas `SIM-01` y `SIM-02`, incluidas reservas contiguas y escenarios de conflicto.
+- [x] 4.1 Implementar creación de solicitudes de un día con espacio activo, inicio posterior al reloj local, horario válido y estado PENDIENTE; verificar con pruebas `SOL-01`, `SOL-02` y `SOL-03` para fecha pasada, hoy con inicio vencido/actual/futuro, cada borde horario, usuario inactivo, espacio inactivo y casos válidos.
+- [x] 4.2 Implementar consulta de disponibilidad por fecha y horario, incluyendo solo espacios activos y considerando bloqueantes únicamente las reservas APROBADAS; verificar con pruebas `DIS-01` y `DIS-02` para aprobadas, pendientes y extremos contiguos.
+- [x] 4.3 Implementar detección de cruces semiabiertos y rechazo de nuevas solicitudes que crucen reservas APROBADAS sin bloquear solicitudes pendientes entre sí; verificar con pruebas `SIM-01` y `SIM-02`, incluidas reservas contiguas y escenarios de conflicto.
 
 ## 5. Aprobación, cancelación e historial
 
