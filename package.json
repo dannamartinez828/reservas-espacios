@@ -1,0 +1,8 @@
+{
+  "name": "sistema-reservas-academicas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

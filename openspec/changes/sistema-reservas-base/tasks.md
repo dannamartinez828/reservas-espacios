@@ -2,10 +2,10 @@
 
 ## 1. Núcleo y almacenamiento
 
-- [ ] 1.1 Crear la estructura inicial de carpetas `js/domain`, `js/storage`, `js/ui` y `tests`, más `package.json` con `"type": "module"` y el script `"test": "node --test"`; verificar que `npm test` se ejecuta correctamente con la suite inicial.
-- [ ] 1.2 Definir la interfaz común de repositorio (`obtener`, `guardar`, `listar`, `eliminar`) y sus adaptadores en memoria y `localStorage`; persistir estado e historial juntos en un único documento JSON y verificar CRUD, historial sin edición/eliminación y errores de escritura con pruebas automatizadas.
-- [ ] 1.3 Centralizar validación de fecha calendario, reloj local y conversión hora/minutos; crear pruebas con nombres que incluyan `SOL-01` para fecha pasada, hoy con inicio pasado/actual/futuro; `SOL-02` para inicio 06:00, fin 22:00, fuera de rango, minutos no válidos e inicio ≥ fin; y `SIM-01` para intervalos superpuestos, anidados, disjuntos y contiguos en ambos órdenes; verificar con `npm test`.
-- [ ] 1.4 Implementar generación de identificadores únicos para cada registro; verificar con pruebas automatizadas que múltiples identificadores generados no colisionan dentro del conjunto almacenado.
+- [x] 1.1 Crear la estructura inicial de carpetas `js/domain`, `js/storage`, `js/ui` y `tests`, más `package.json` con `"type": "module"` y el script `"test": "node --test"`; verificar que `npm test` se ejecuta correctamente con la suite inicial.
+- [x] 1.2 Definir la interfaz común de repositorio (`obtener`, `guardar`, `listar`, `eliminar`) y sus adaptadores en memoria y `localStorage`; persistir estado e historial juntos en un único documento JSON y verificar CRUD, historial sin edición/eliminación y errores de escritura con pruebas automatizadas.
+- [x] 1.3 Centralizar validación de fecha calendario, reloj local y conversión hora/minutos; crear pruebas con nombres que incluyan `SOL-01` para fecha pasada, hoy con inicio pasado/actual/futuro; `SOL-02` para inicio 06:00, fin 22:00, fuera de rango, minutos no válidos e inicio ≥ fin; y `SIM-01` para intervalos superpuestos, anidados, disjuntos y contiguos en ambos órdenes; verificar con `npm test`.
+- [x] 1.4 Implementar generación de identificadores únicos para cada registro; verificar con pruebas automatizadas que múltiples identificadores generados no colisionan dentro del conjunto almacenado.
 
 ## 2. Usuarios y roles
 
